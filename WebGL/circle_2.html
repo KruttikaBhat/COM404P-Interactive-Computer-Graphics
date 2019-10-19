@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Circle</title>
+      </head>
+
+  <body>
+    <canvas id="webgl" width="640" height="640"></canvas>
+    <script>
+      function radian (degree) {
+         var rad = degree * (Math.PI / 180);
+         return rad;
+      }
+
+        var canvas = document.getElementById("webgl")
+        var gl= canvas.getContext("experimental-webgl");
+
+        gl.clearColor(0.8, 0.8, 0.8, 1); //background
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+
+        var vertCode =
+        "attribute vec3 pos;"+
+        "void main() {"+
+        "	gl_Position = vec4(pos, 2.0);"+
+        "}"
+        //Create a vertex shader object
+        var vertShader = gl.createShader(gl.VERTEX_SHADER);
+        gl.shaderSource(vertShader, vertCode);
+
+        //Compile the vertex shader
+        gl.compileShader(vertShader);
+
+        var fragCode = "void main() {"+
+        "	gl_FragColor = vec4(0.5, 0.5, 1.0, 1.0);"+
+        "}"
+        // Create fragment shader object
+        var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
+
+        // Attach fragment shader source code
+        gl.shaderSource(fragShader, fragCode);
+
+        // Compile the fragment shader
+        gl.compileShader(fragShader);
+
+        var shaderProgram = gl.createProgram();
+
+        gl.attachShader(shaderProgram, vertShader);
+
+        // Attach a fragment shader
+        gl.attachShader(shaderProgram, fragShader);
+
+        gl.linkProgram(shaderProgram);
+
+        gl.useProgram(shaderProgram);
+
+         var arrayradian = [];
+         var rotationradian = [];
+        // smaller the increase
+         for(var i=0; i<=360;i+=0.1){
+           arrayradian.push(radian(i));
+             rotationradian.push(Math.cos(radian(i)),  Math.sin(radian(i)),  0);
+         }
+        
+        var vertex_buffer = gl.createBuffer();
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(rotationradian),gl.STATIC_DRAW);
+        var attr = gl.getAttribLocation(shaderProgram, "pos");
+        gl.enableVertexAttribArray(attr);
+        gl.vertexAttribPointer(attr, 3, gl.FLOAT, false, 0, 0);
+        gl.drawArrays(gl.LINES,0,rotationradian.length/3);
+
+
+    </script>
+  </body>
+</html>
