@@ -1,4 +1,4 @@
-// ----- cube-animation.js -----
+
 
 var gl;
 
