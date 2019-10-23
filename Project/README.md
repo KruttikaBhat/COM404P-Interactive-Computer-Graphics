@@ -1,6 +1,7 @@
 This is a game called Endless Runner game which is written using the three.js library. Ensure that audio is not blocked on your browser to hear the sound effects. Use [this link](https://support.mozilla.org/en-US/kb/block-autoplay) to understand how.
-Controls to play: 
-Up- Jump
+
+Controls to play:  
+Up- Jump 
 Left/Right- Move
 
 Included files:
