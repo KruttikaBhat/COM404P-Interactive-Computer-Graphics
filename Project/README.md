@@ -1,3 +1,5 @@
+This is a game called Endless Runner game which is written using the three.js library.
+
 Included files:
 
 1. snowHits.mp3- This is the collision sound.  
